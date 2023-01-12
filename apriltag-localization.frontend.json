@@ -1,0 +1,164 @@
+{
+  "configById": {
+    "ImageViewPanel!4095qdt": {
+      "cameraTopic": "/frontend/overlay",
+      "enabledMarkerTopics": [],
+      "mode": "fit",
+      "pan": {
+        "x": 0,
+        "y": 0
+      },
+      "rotation": 0,
+      "synchronize": false,
+      "transformMarkers": false,
+      "zoom": 1,
+      "smooth": false,
+      "flipHorizontal": false
+    },
+    "RawMessages!46l238y": {
+      "diffEnabled": false,
+      "diffMethod": "custom",
+      "diffTopicPath": "",
+      "showFullMessageForDiff": false,
+      "topicPath": "/frontend/detections"
+    },
+    "3D!25s6av6": {
+      "cameraState": {
+        "perspective": true,
+        "distance": 1.7948966386129934,
+        "phi": 156.5700141216329,
+        "thetaOffset": 0.36980434847006954,
+        "targetOffset": [
+          0.03904271261126412,
+          -0.2313170696228256,
+          1.6827983329437536e-18
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "targetOrientation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "fovy": 45,
+        "near": 0.5,
+        "far": 5000
+      },
+      "followMode": "follow-none",
+      "scene": {
+        "enableStats": false,
+        "transforms": {
+          "editable": false,
+          "showLabel": false,
+          "axisScale": 1,
+          "lineWidth": 1
+        },
+        "meshUpAxis": "y_up"
+      },
+      "transforms": {
+        "frame:tag_14": {
+          "visible": false
+        },
+        "frame:tag_0": {
+          "visible": false
+        },
+        "frame:tag_15": {
+          "visible": false
+        },
+        "frame:tag_16": {
+          "visible": false
+        },
+        "frame:tag_20": {
+          "visible": false
+        },
+        "frame:tag_27": {
+          "visible": false
+        },
+        "frame:tag_3": {
+          "visible": false
+        },
+        "frame:tag_4": {
+          "visible": false
+        },
+        "frame:tag_6": {
+          "visible": false
+        },
+        "frame:tag_8": {
+          "visible": false
+        },
+        "frame:": {
+          "visible": false
+        },
+        "frame:tag_1": {
+          "visible": false
+        },
+        "frame:camera_frame": {
+          "visible": true
+        }
+      },
+      "topics": {
+        "/frontend/overlay": {
+          "visible": false
+        },
+        "/frontend/camera/scene": {
+          "visible": true
+        }
+      },
+      "layers": {
+        "e7755879-33ab-40b4-9b5e-33f52d4fa2f6": {
+          "visible": true,
+          "frameLocked": true,
+          "label": "Grid",
+          "instanceId": "e7755879-33ab-40b4-9b5e-33f52d4fa2f6",
+          "layerId": "foxglove.Grid",
+          "frameId": "camera_frame",
+          "size": 10,
+          "divisions": 10,
+          "lineWidth": 1,
+          "color": "#248eff",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            -90,
+            0,
+            0
+          ],
+          "order": 1
+        }
+      },
+      "publish": {
+        "type": "point",
+        "poseTopic": "/move_base_simple/goal",
+        "pointTopic": "/clicked_point",
+        "poseEstimateTopic": "/initialpose",
+        "poseEstimateXDeviation": 0.5,
+        "poseEstimateYDeviation": 0.5,
+        "poseEstimateThetaDeviation": 0.26179939
+      },
+      "followTf": "camera_frame"
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "layout": {
+    "first": {
+      "first": "ImageViewPanel!4095qdt",
+      "second": "RawMessages!46l238y",
+      "direction": "column",
+      "splitPercentage": 29.053420805998126
+    },
+    "second": "3D!25s6av6",
+    "direction": "row",
+    "splitPercentage": 27.742676622630675
+  }
+}

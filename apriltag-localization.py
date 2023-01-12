@@ -9,7 +9,8 @@ from foxglove_websocket.server import FoxgloveServer, FoxgloveServerListener
 from foxglove_websocket.types import ChannelId
 
 from frontend import TagDetector
-from websocket_serdes import detections_channel_def, serialize_detections, overlay_channel_def, serialize_overlay
+from websocket_serdes import detections_channel_def, serialize_detections, overlay_channel_def, serialize_overlay, \
+    camera_scene_def, serialize_cam_scene, frame_tf_def, serialize_tf
 
 
 async def main():
@@ -24,6 +25,8 @@ async def main():
         server.set_listener(Listener())
         detections_chan = await server.add_channel(detections_channel_def())
         overlay_chan = await server.add_channel(overlay_channel_def())
+        cam_scene_chan = await server.add_channel(camera_scene_def())
+        tf_chan = await server.add_channel(frame_tf_def())
 
         with open(sys.argv[1], 'r') as fp:
             yaml_config = yaml.load(fp, yaml.Loader)
@@ -48,6 +51,18 @@ async def main():
                 overlay_chan,
                 time.time_ns(),
                 serialize_overlay(overlay),
+            )
+
+            await server.send_message(
+                cam_scene_chan,
+                time.time_ns(),
+                serialize_cam_scene(detections)
+            )
+
+            await server.send_message(
+                tf_chan,
+                time.time_ns(),
+                serialize_tf()
             )
 
 
