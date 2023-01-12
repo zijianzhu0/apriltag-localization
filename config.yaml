@@ -1,0 +1,46 @@
+frontend:
+  camera_params:
+    cal_model: RADIAL
+    calibration:
+      K:
+      - - 469.26227616480844
+        - 0.0
+        - 324.8353320609182
+      - - 0.0
+        - 473.44451125153404
+        - 180.53529827800529
+      - - 0.0
+        - 0.0
+        - 1.0
+      dist:
+      - - 0.09319986189806853
+        - -0.20417602085600087
+        - 0.002922582806678064
+        - 0.004672342477041753
+        - 0.21183941264554015
+    scale_percent: 50
+  capture_id: 0
+  decode_sharpening: 0.25
+  num_threads: 2
+  quad_decimate: 2.0
+  quad_sigma: 0.7
+  refine_edges: 1
+  tag_family: tag16h5
+  tag_size: 0.065
+  decision_threshold: 10.0
+  max_pose_err: 0.1
+
+localizer:
+  detections_noise: 0.1
+  tag_map:
+  - noise: 0.01
+    orientation:
+    - 1
+    - 0
+    - 0
+    - 0
+    position:
+    - 0
+    - 0
+    - 0
+    tag_id: 1
