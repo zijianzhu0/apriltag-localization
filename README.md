@@ -2,8 +2,8 @@
 The 2023 FIRST FRC season [introduced AprilTag fiducial markers](https://docs.wpilib.org/en/stable/docs/software/vision-processing/apriltag/apriltag-intro.html) on the field for robots to localize themselves on the competition field. This repo is an open-source implementation of a soft-real-time AprilTag localization algorithm for use on an embedded target like a Raspberry Pi. Combined with a hard-real-time robot microcontroller (roboRio for example) teams can fuse odometry and vision data to robustly estimate robot pose over the course of a match.
 
 ## Quick Start
-This implementation is coded entirely in Python 3, so it can run on virutally all single-board-computers with at least 2GB of RAM and 1GHz processor. To get started setup a virtual environment using Python 3:
-1. `python3 -m venv venv` and source the activation script `source venv/bin/activate`.
+This implementation is coded entirely in Python 3, so it can run on virutally all single-board-computers with at least 2GB of RAM and 1GHz processor. To get started set up a virtual environment using Python 3:
+1. Clone this repository onto the machine you'll do vision processing on. Run `python3 -m venv venv` and source the activation script `source venv/bin/activate`.
 2. Then install the required python packages `pip install -r requirements.txt`.
 3. You'll need a webcam connected to your machine for the following steps. Any USB or raspicam would be fine as long as it's OpenCV compatible.
 4. Calibrate the camera by running `python calibrate.py config.yaml`. This opens a window where you can move a checkerboard calibration pattern around the camera's field-of-view. The calibration script will automatically collect a sample of 20 images to calculate intrinsic projection and distortion parameters. The results are saved as `config.yaml` with the camera parameters field populated. If you don't already have a checkerboard, print [the 6x9 example from the OpenCV repository](https://github.com/opencv/opencv/blob/4.x/doc/pattern.png) on letter-sized paper and tape it to a rigid surface.
