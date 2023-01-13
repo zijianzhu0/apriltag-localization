@@ -1,0 +1,8 @@
+foxglove-websocket==0.0.8
+gtsam==4.1.0
+importlib-metadata==6.0.0
+numpy==1.24.1
+opencv-python==4.7.0.68
+pupil-apriltags==1.0.4.post10
+PyYAML==6.0
+websockets==10.4
