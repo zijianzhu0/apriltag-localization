@@ -10,7 +10,7 @@ def resize_image(frame, scale_percent):
 
 
 class TagDetector:
-    def __init__(self, frontend_yaml):
+    def __init__(self, frontend_yaml, tag_map):
         self.detector = Detector(
             families=frontend_yaml["tag_family"],
             nthreads=frontend_yaml["num_threads"],
@@ -31,12 +31,16 @@ class TagDetector:
         self.max_pose_err = frontend_yaml["max_pose_err"]
         self.decision_threshold = frontend_yaml["decision_threshold"]
 
+        self.tag_map = tag_map
+
     def filter_detections(self, detections):
         result = []
         for det in detections:
             if det.pose_err > self.max_pose_err:
                 continue
             if det.decision_margin < self.decision_threshold:
+                continue
+            if det.tag_id not in self.tag_map:
                 continue
 
             result.append(det)

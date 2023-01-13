@@ -57,9 +57,9 @@ def serialize_detections(detections):
     return json.dumps({"detections": det_json}).encode("utf8")
 
 
-def overlay_channel_def():
+def overlay_channel_def(topic_name):
     return {
-        "topic": "/frontend/overlay",
+        "topic": topic_name,
         "encoding": "json",
         "schemaName": "ros.sensor_msgs.CompressedImage",
         "schema": json.dumps({
@@ -230,3 +230,42 @@ def serialize_cam_scene(detections):
         }],
         "deletions": [],
     }).encode("utf8")
+
+
+def pose_def(topic_name):
+    with open("schemas/Pose.json", "r") as fp:
+        schema_str = fp.read()
+
+    return {
+        "topic": topic_name,
+        "encoding": "json",
+        "schemaName": "foxglove.Pose",
+        "schema": schema_str,
+    }
+
+
+def serialize_pose(pose):
+    pose_t = pose.translation()
+    quat = pose.rotation().quaternion()
+    return json.dumps({
+        "position": {
+            "x": pose_t[0],
+            "y": pose_t[1],
+            "z": pose_t[2],
+        },
+        "orientation": {
+            "x": quat[1],
+            "y": quat[2],
+            "z": quat[3],
+            "w": quat[0],
+        },
+    }).encode("utf8")
+
+
+def draw_minimap(localizer_yaml, field2cam, base_img):
+    h, w, _ = base_img.shape
+    x_scale = float(w) / localizer_yaml['field_length']
+    y_scale = float(h) / localizer_yaml['field_width']
+    pix_coord = field2cam.translation()[:2] * np.array([x_scale, y_scale])
+    pix_coord[1] = h - pix_coord[1]
+    return cv2.circle(np.copy(base_img), (int(pix_coord[0]), int(pix_coord[1])), radius=20, color=(255, 0, 0), thickness=-1)

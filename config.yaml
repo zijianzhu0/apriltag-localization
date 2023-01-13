@@ -32,15 +32,40 @@ frontend:
 
 localizer:
   detections_noise: 0.1
+  field_length: 16.540988
+  field_width: 8.00354
+
+  # tag poses collected from https://firstfrc.blob.core.windows.net/frc2023/FieldAssets/2023LayoutMarkingDiagram.pdf
   tag_map:
-  - noise: 0.01
-    orientation:
-    - 1
-    - 0
-    - 0
-    - 0
-    position:
-    - 0
-    - 0
-    - 0
-    tag_id: 1
+    - tag_id: 1
+      noise: 0.01
+      position: [15.513558, 1.071626, 0.462788]
+      orientation: [1, 0, 0, 0]
+    - tag_id: 2
+      noise: 0.01
+      position: [15.513558, 2.748026, 0.462788]
+      orientation: [1, 0, 0, 0]
+    - tag_id: 3
+      noise: 0.01
+      position: [15.513558, 4.424426, 0.462788]
+      orientation: [1, 0, 0, 0]
+    - tag_id: 4
+      noise: 0.01
+      position: [16.178784, 6.749796, 0.695452]
+      orientation: [1, 0, 0, 0]
+    - tag_id: 5
+      noise: 0.01
+      position: [0.36195, 6.749796, 0.695452]
+      orientation: [0, 0, 0, 1]
+    - tag_id: 6
+      noise: 0.01
+      position: [1.02743, 4.424426, 0.462788]
+      orientation: [0, 0, 0, 1]
+    - tag_id: 7
+      noise: 0.01
+      position: [1.02743, 2.748026, 0.462788]
+      orientation: [0, 0, 0, 1]
+    - tag_id: 8
+      noise: 0.01
+      position: [1.02743, 1.071626, 0.462788]
+      orientation: [0, 0, 0, 1]
