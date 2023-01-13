@@ -22,16 +22,23 @@
       "showFullMessageForDiff": false,
       "topicPath": "/frontend/detections"
     },
+    "RawMessages!2a6gtzm": {
+      "diffEnabled": false,
+      "diffMethod": "custom",
+      "diffTopicPath": "",
+      "showFullMessageForDiff": false,
+      "topicPath": "/cam_pose"
+    },
     "3D!25s6av6": {
       "cameraState": {
         "perspective": true,
-        "distance": 1.7948966386129934,
-        "phi": 156.5700141216329,
-        "thetaOffset": 0.36980434847006954,
+        "distance": 2.093479094460163,
+        "phi": 161.06436522080534,
+        "thetaOffset": 0.26657312257833926,
         "targetOffset": [
-          0.03904271261126412,
-          -0.2313170696228256,
-          1.6827983329437536e-18
+          0.01956946160676489,
+          -0.18918163135717084,
+          1.6825482382252004e-18
         ],
         "target": [
           0,
@@ -143,6 +150,20 @@
         "poseEstimateThetaDeviation": 0.26179939
       },
       "followTf": "camera_frame"
+    },
+    "ImageViewPanel!kynlsg": {
+      "cameraTopic": "/minimap",
+      "enabledMarkerTopics": [],
+      "mode": "fit",
+      "pan": {
+        "x": 28.748207812827964,
+        "y": -5.113248053309357
+      },
+      "rotation": 0,
+      "synchronize": false,
+      "transformMarkers": false,
+      "zoom": 0.9513001168518672,
+      "smooth": false
     }
   },
   "globalVariables": {},
@@ -153,12 +174,21 @@
   "layout": {
     "first": {
       "first": "ImageViewPanel!4095qdt",
-      "second": "RawMessages!46l238y",
+      "second": {
+        "first": "RawMessages!46l238y",
+        "second": "RawMessages!2a6gtzm",
+        "direction": "column",
+        "splitPercentage": 64.59709379128138
+      },
       "direction": "column",
       "splitPercentage": 29.053420805998126
     },
-    "second": "3D!25s6av6",
+    "second": {
+      "first": "3D!25s6av6",
+      "second": "ImageViewPanel!kynlsg",
+      "direction": "column"
+    },
     "direction": "row",
-    "splitPercentage": 27.742676622630675
+    "splitPercentage": 29.695577254451464
   }
 }
