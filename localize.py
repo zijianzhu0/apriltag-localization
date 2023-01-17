@@ -64,25 +64,23 @@ def localize_multi_tags(detections, tag_map, detection_noise):
     initial_values = gtsam.Values()
 
     # Load a prior map of detected tags
-    processed_tags = set()
+    confirmed_tags = set()
     for det in detections:
         tag_id = det.tag_id
         assert tag_id in tag_map
 
         # don't process the same tag more than once
-        if tag_id in processed_tags:
+        if tag_id in confirmed_tags:
             continue
 
         tag_info = tag_map[tag_id]
         tag_key = T(tag_id)
         initial_values.insert(tag_key, tag_info.pose)
         graph.add(gtsam.PriorFactorPose3(tag_key, tag_info.pose, tag_info.prior_noise_model))
-        processed_tags.add(tag_id)
+        confirmed_tags.add(tag_id)
 
     # No point in optimizing just one confirmed detection
-    if processed_tags.size() < 2:
-        print('[localize_camera] not enough mapped tags found')
-        return None
+    assert len(confirmed_tags) > 1
 
     # compute initial camera pose
     init_cam_pose = generate_initial_camera_pose(detections, tag_map)
@@ -93,12 +91,12 @@ def localize_multi_tags(detections, tag_map, detection_noise):
 
     # finally add the detection factors
     for det in detections:
-        assert det.tag_id in processed_tags
+        assert det.tag_id in confirmed_tags
 
         # TODO update this to scale noise based on detection pose error
         detection_nm = gtsam.noiseModel.Isotropic.Sigma(6, detection_noise)
         cam_tag_measurement = to_veh_frame(det)
-        graph.push_back(gtsam.BetweenFactorPose3(camera_key, T(tag_id), cam_tag_measurement, detection_nm))
+        graph.push_back(gtsam.BetweenFactorPose3(camera_key, T(det.tag_id), cam_tag_measurement, detection_nm))
 
     # optimize using Levenberg-Marquardt optimization
     params = gtsam.LevenbergMarquardtParams()
@@ -108,7 +106,7 @@ def localize_multi_tags(detections, tag_map, detection_noise):
     # TODO apply some sanity checks
     # i.e. ensure the optimization completed, no high residuals, tag map didn't deviate too much, etc...
 
-    return result.at(camera_key)
+    return result.atPose3(camera_key)
 
 
 # tag_map is a dict of tag_id -> TagInfo
@@ -124,7 +122,3 @@ def build_map(tag_map_yaml):
         tag_map[tag_yaml['tag_id']] = TagInfo(field_pose, tag_yaml['noise'])
 
     return tag_map
-
-
-if __name__ == '__main__':
-    print('Testing localization...')
