@@ -27,23 +27,6 @@ def to_veh_frame(detection):
     return veh2tag
 
 
-def generate_initial_camera_pose(detections, tag_map):
-    # pick the detection with lowest error
-    assert len(detections) > 0
-
-    best_detection = None
-    best_error = 1e99
-    for det in detections:
-        if det.pose_err < best_error:
-            best_detection = det
-            best_error = det.pose_err
-
-    cam2tag = to_veh_frame(best_detection)
-    field2tag = tag_map[best_detection.tag_id].pose
-    field2cam = field2tag.transformPoseFrom(cam2tag.inverse())
-    return field2cam
-
-
 def localize_single_tag(detections, tag_map):
     assert len(detections) == 1
 
@@ -57,11 +40,24 @@ def localize_single_tag(detections, tag_map):
     return field2tag.transformPoseFrom(cam2tag.inverse())
 
 
+def generate_initial_camera_pose(detections, tag_map):
+    # pick the detection with lowest error
+    assert len(detections) > 0
+
+    best_detection = None
+    best_error = 1e99
+    for det in detections:
+        if det.pose_err < best_error:
+            best_detection = det
+            best_error = det.pose_err
+
+    return localize_single_tag([best_detection], tag_map)
+
+
 def localize_multi_tags(detections, tag_map, detection_noise):
     # Use the factor graph to average results if there's more than 1 detection
     # Otherwise, just return none.
-    if len(detections) < 2:
-        return None
+    assert len(detections) > 1
 
     # setup optimization problem
     graph = gtsam.NonlinearFactorGraph()

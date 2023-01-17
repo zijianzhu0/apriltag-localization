@@ -268,4 +268,5 @@ def draw_minimap(localizer_yaml, field2cam, base_img):
     y_scale = float(h) / localizer_yaml['field_width']
     pix_coord = field2cam.translation()[:2] * np.array([x_scale, y_scale])
     pix_coord[1] = h - pix_coord[1]
-    return cv2.circle(np.copy(base_img), (int(pix_coord[0]), int(pix_coord[1])), radius=20, color=(255, 0, 0), thickness=-1)
+    img_coords = (int(pix_coord[0]), int(pix_coord[1]))
+    return cv2.circle(np.copy(base_img), img_coords, radius=20, color=(255, 0, 0), thickness=-1)
