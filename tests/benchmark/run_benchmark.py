@@ -56,6 +56,7 @@ if __name__ == '__main__':
         estimation_latency = time.time() - start
         measured_pos = cam_pose.translation()[0:2]
         print(f'  localized position: {measured_pos} latency {estimation_latency} seconds')
+        print(f'  attitude (ypr degrees): {np.rad2deg(cam_pose.rotation().ypr())}')
         estimation_latencies.append(estimation_latency)
 
         # evaluate error
