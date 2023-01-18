@@ -1,0 +1,59 @@
+frontend:
+  camera_params:
+    cal_model: RADIAL
+    calibration:
+      K: [[1146.45,   0.0,  640.0],
+          [   0.0, 1146.45, 360.0],
+          [   0.0,    0.0,    1.0]]
+      dist: [-0.00982442, -0.0571186, 0.0, 0.0, 0.0]
+    scale_percent: 100
+  capture_id: -1
+  decode_sharpening: 0.25
+  num_threads: 2
+  quad_decimate: 2.0
+  quad_sigma: 0.7
+  refine_edges: 1
+  tag_family: tag16h5
+  tag_size: 0.1524
+  decision_threshold: 10.0
+  max_pose_err: 0.1
+
+localizer:
+  detections_noise: 0.1
+  field_length: 16.540988
+  field_width: 8.00354
+
+  # tag poses collected from https://firstfrc.blob.core.windows.net/frc2023/FieldAssets/2023LayoutMarkingDiagram.pdf
+  tag_map:
+    - tag_id: 1
+      noise: 0.01
+      position: [15.513558, 1.071626, 0.462788]
+      orientation: [1, 0, 0, 0]
+    - tag_id: 2
+      noise: 0.01
+      position: [15.513558, 2.748026, 0.462788]
+      orientation: [1, 0, 0, 0]
+    - tag_id: 3
+      noise: 0.01
+      position: [15.513558, 4.424426, 0.462788]
+      orientation: [1, 0, 0, 0]
+    - tag_id: 4
+      noise: 0.01
+      position: [16.178784, 6.749796, 0.695452]
+      orientation: [1, 0, 0, 0]
+    - tag_id: 5
+      noise: 0.01
+      position: [0.36195, 6.749796, 0.695452]
+      orientation: [0, 0, 0, 1]
+    - tag_id: 6
+      noise: 0.01
+      position: [1.02743, 4.424426, 0.462788]
+      orientation: [0, 0, 0, 1]
+    - tag_id: 7
+      noise: 0.01
+      position: [1.02743, 2.748026, 0.462788]
+      orientation: [0, 0, 0, 1]
+    - tag_id: 8
+      noise: 0.01
+      position: [1.02743, 1.071626, 0.462788]
+      orientation: [0, 0, 0, 1]

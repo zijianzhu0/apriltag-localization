@@ -20,13 +20,18 @@ class TagDetector:
             decode_sharpening=frontend_yaml["decode_sharpening"],
             debug=0)
 
-        self.capture = cv2.VideoCapture(frontend_yaml["capture_id"])
+        capture_id = frontend_yaml["capture_id"]
+        if capture_id >= 0:
+            self.capture = cv2.VideoCapture(capture_id)
+        else:
+            self.capture = None
         self.tag_size = frontend_yaml["tag_size"]
 
         cam_yaml = frontend_yaml["camera_params"]
         assert cam_yaml["cal_model"] == "RADIAL"
         K = cam_yaml["calibration"]["K"]
         self.camera_params = (K[0][0], K[1][1], K[0][2], K[1][2])
+        self.scale_percent = cam_yaml["scale_percent"]
 
         self.max_pose_err = frontend_yaml["max_pose_err"]
         self.decision_threshold = frontend_yaml["decision_threshold"]
@@ -47,13 +52,16 @@ class TagDetector:
 
         return result
 
-    def process_frame(self):
+    def process_capture(self):
         ret, frame = self.capture.read()
         if not ret:
             return None
 
+        return self.process_frame(frame)
+
+    def process_frame(self, frame):
         # 1) resize image
-        frame = resize_image(frame, 50)
+        frame = resize_image(frame, self.scale_percent)
 
         # TODO 2) undistort https://amroamroamro.github.io/mexopencv/matlab/cv.undistort.html
 
@@ -75,4 +83,5 @@ class TagDetector:
         return detections, overlay
 
     def __del__(self):
-        self.capture.release()
+        if self.capture is not None:
+            self.capture.release()

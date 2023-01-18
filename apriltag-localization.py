@@ -41,7 +41,7 @@ async def main():
         tag_map = build_map(localizer_yaml["tag_map"])
         tag_detector = TagDetector(yaml_config["frontend"], tag_map)
         while True:
-            frontend_result = tag_detector.process_frame()
+            frontend_result = tag_detector.process_capture()
             if frontend_result is None:
                 continue
 
